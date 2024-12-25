@@ -1,0 +1,6 @@
+Streamlit
+Plotly
+Pandas
+Numpy
+skicit.learn
+seaborn
