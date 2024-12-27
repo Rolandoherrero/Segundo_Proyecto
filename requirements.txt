@@ -1,6 +1,6 @@
-Streamlit
-Plotly
-Pandas
-Numpy
-skicit.learn
-seaborn
+streamlit
+plotly
+matplotlib
+pandas
+numpy
+scikit-learn>=1.0
