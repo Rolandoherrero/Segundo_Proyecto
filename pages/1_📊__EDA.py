@@ -9,7 +9,7 @@ def load_data():
     return pd.read_csv('data/machine_failure_dataset.csv')
 
 #Configuracion de la pagina
-st.title("Análisis Exploratotio de Datos (EDA)")
+st.title("Análisis Exploratorio de Datos (EDA)")
 
 #Cargar datos
 mfd=load_data()
