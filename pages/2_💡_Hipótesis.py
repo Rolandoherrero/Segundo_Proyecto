@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 import matplotlib as plt
+import seaborn as sns
 from src.hipotesis import hipotesis_1, hipotesis_2, hipotesis_3, hipotesis_4, hipotesis_5
 
 #Cargar el dataframe

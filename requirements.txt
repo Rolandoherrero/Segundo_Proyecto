@@ -2,5 +2,6 @@ streamlit
 plotly
 matplotlib
 pandas
+seaborn
 numpy
 scikit-learn>=1.0

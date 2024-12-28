@@ -1,5 +1,6 @@
 import streamlit as st 
 import pandas as pd
+import seaborn as sns
 from src.eda import bargraphic, cajasbigotes, graficodispersion
 
 #Carga el dataframe
