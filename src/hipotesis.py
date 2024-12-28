@@ -265,7 +265,7 @@ def hipotesis_4(mfd):
  #Hipotesis 5
 def hipotesis_5(mfd):
         #Grafico 2: Grafico de barras por tipo de máquina
-    labels = ['Perforadora', 'Torno', 'Molino']
+    labels = ['Perforador', 'Torno', 'Molino']
     fallas_por_tipo = mfd.groupby("Tipo_de_Maquina")["Riesgo_de_Falla"].sum()
 
     # Crear el gráfico de barras
@@ -280,8 +280,8 @@ def hipotesis_5(mfd):
 
     #Tabla de porcentajes
     data5 = {
-    "Categoría": ["Máquina Perforadora", "Máquina Torno", "Máquina Molino"],
-    "Porcentaje (%)": [31.14, 31.06, 27.74],
+    "Categoría": ["Máquina Molino", "Máquina Torno", "Máquina Perforadora" ],
+    "Porcentaje (%)": [ 27.74, 31.06, 31.14],
     }
 
     df5 = pd.DataFrame(data5)
