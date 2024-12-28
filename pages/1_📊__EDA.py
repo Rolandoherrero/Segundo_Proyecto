@@ -35,7 +35,7 @@ st.header("Distribución de temperatura segun el tipo de máquina")
 cajasbigotes_fig = cajasbigotes(mfd)
 st.plotly_chart(cajasbigotes_fig)
 
-st.header("Relación entre la vibración y la potencia usada")
+st.header("Relación entre la Vibracion y la potencia usada")
 graficodispersion_fig = graficodispersion(mfd)
 st.plotly_chart(graficodispersion_fig)
 

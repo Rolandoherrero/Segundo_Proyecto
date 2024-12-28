@@ -24,11 +24,11 @@ st.subheader("Tabla de Porcentajes de Falla por Rango de Temperatura")
 st.table(df1)
 
 #Hipotesis 2
-st.header("Hipotesis 2:  Un mayor nivel de vibración en la máquina incrementa la probabilidad de fallo.")
+st.header("Hipotesis 2:  Un mayor nivel de Vibracion en la máquina incrementa la probabilidad de fallo.")
 fig_4, fig_5, df2 = hipotesis_2(mfd)
 st.plotly_chart(fig_4, use_container_width=True)
 st.plotly_chart(fig_5, use_container_width=True)
-st.subheader("Tabla de Porcentajes de Falla por Rango de Vibración")
+st.subheader("Tabla de Porcentajes de Falla por Rango de Vibracion")
 st.table(df2)
 
 #Hipotesis 3

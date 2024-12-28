@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 def bargraphic(mfd):
     """Gráfico de barras de la cantidad de máquinas de cada tipo."""
-    tipo = mfd["Machine_Type"].value_counts()
+    tipo = mfd["Tipo_de_Maquina"].value_counts()
     fig = go.Figure(
         data=[
             go.Bar(
@@ -31,22 +31,22 @@ def cajasbigotes(mfd):
     """Gráfico de cajas y bigotes para temperatura según el tipo de máquina."""
     fig = px.box(
         mfd,
-        x='Machine_Type',
-        y='Temperature',
+        x='Tipo_de_Maquina',
+        y='Temperatura',
         title='Distribución de temperatura según el tipo de máquina',
-        labels={'Machine_Type': 'Tipo de máquina', 'Temperature': 'Temperatura'}
+        labels={'Tipo_de_Maquina': 'Tipo de máquina', 'Temperatura': 'Temperatura'}
     )
     return fig
 
 
 def graficodispersion(mfd):
-    """Gráfico de dispersión para vibración vs potencia usada."""
+    """Gráfico de dispersión para Vibracion vs potencia usada."""
     fig = px.scatter(
         mfd,
-        x='Vibration',
-        y='Power_Usage',
-        title='Relación entre la vibración y la potencia usada',
-        labels={'Vibration': 'Vibración', 'Power_Usage': 'Potencia usada'}
+        x='Vibracion',
+        y='Potencia_Empleada',
+        title='Relación entre la Vibracion y la potencia usada',
+        labels={'Vibracion': 'Vibracion', 'Potencia_Empleada': 'Potencia usada'}
     )
     return fig
 

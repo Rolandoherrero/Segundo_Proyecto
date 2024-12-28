@@ -18,18 +18,18 @@ try:
 
     train_data = load_data()
 
-    # Comprobar que el archivo tiene la columna "Failure_Risk"
-    if "Failure_Risk" not in train_data.columns:
-        st.error("El archivo CSV debe contener la columna 'Failure_Risk'.")
+    # Comprobar que el archivo tiene la columna "Riesgo_de_Falla"
+    if "Riesgo_de_Falla" not in train_data.columns:
+        st.error("El archivo CSV debe contener la columna 'Riesgo_de_Falla'.")
     else:
         # Separar características y etiqueta
-        copia = train_data["Failure_Risk"].copy() 
-        y = train_data["Failure_Risk"]
-        X = train_data.drop(["Failure_Risk"], axis=1)
+        copia = train_data["Riesgo_de_Falla"].copy() 
+        y = train_data["Riesgo_de_Falla"]
+        X = train_data.drop(["Riesgo_de_Falla"], axis=1)
 
         # Procesar la columna target (etiquetas) usando LabelEncoder
         encoder = LabelEncoder()
-        X['Machine_Type'] = encoder.fit_transform(X['Machine_Type'])
+        X['Tipo_de_Maquina'] = encoder.fit_transform(X['Tipo_de_Maquina'])
 
         # Dividir en conjuntos de entrenamiento y prueba
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -55,10 +55,10 @@ try:
         # Mostrar métricas utilizando st.metric
         st.title("Métricas del Modelo Entrenado")
         col1, col2, col3, col4 = st.columns(4)
-        col1.metric("Accuracy", f"{accuracy: .2f}", border=True)
-        col2.metric("F1 Score", f"{f1: .2f}", border=True)
-        col3.metric("Precision", f"{precision: .2f}", border=True)
-        col4.metric("Recall", f"{recall: .2f}", border=True)
+        col1.metric("Exactitud", f"{accuracy: .2f}", border=True)
+        col2.metric("Puntaje F1", f"{f1: .2f}", border=True)
+        col3.metric("Precisión", f"{precision: .2f}", border=True)
+        col4.metric("Sensibilidad", f"{recall: .2f}", border=True)
 
 except FileNotFoundError:
     st.error(f"El archivo {csv_path} no se encontró. Verifica que exista en el folder especificado.")
@@ -76,12 +76,12 @@ if prediction_file is not None:
         st.write("Vista previa del archivo cargado para predicciones:")
         st.dataframe(prediction_data.head())
 
-        # Verificar si "Failure_Risk" está presente en los datos de predicción
-        if "Failure_Risk" in prediction_data.columns:
-            st.warning("La columna 'Failure_Risk' será ignorada para las predicciones.")
-            # Guardar la copia de 'Failure_Risk' antes de eliminarla
-            copia_prediccion = prediction_data["Failure_Risk"].copy()
-            prediction_data = prediction_data.drop(columns=["Failure_Risk"])
+        # Verificar si "Riesgo_de_Falla" está presente en los datos de predicción
+        if "Riesgo_de_Falla" in prediction_data.columns:
+            st.warning("La columna 'Riesgo_de_Falla' será ignorada para las predicciones.")
+            # Guardar la copia de 'Riesgo_de_Falla' antes de eliminarla
+            copia_prediccion = prediction_data["Riesgo_de_Falla"].copy()
+            prediction_data = prediction_data.drop(columns=["Riesgo_de_Falla"])
 
         # Asegurarse de que las columnas coinciden con las del modelo
         expected_features = model.feature_names_in_
@@ -89,8 +89,8 @@ if prediction_file is not None:
             missing_features = set(expected_features) - set(prediction_data.columns)
             st.error(f"El archivo CSV debe contener las siguientes columnas: {missing_features}")
         else:
-            # Transformar la columna 'Machine_Type' en el conjunto de predicción
-            prediction_data['Machine_Type'] = encoder.transform(prediction_data['Machine_Type'])
+            # Transformar la columna 'Tipo_de_Maquina' en el conjunto de predicción
+            prediction_data['Tipo_de_Maquina'] = encoder.transform(prediction_data['Tipo_de_Maquina'])
             
             # Realizar las predicciones
             y_pred = model.predict(prediction_data)
@@ -100,9 +100,9 @@ if prediction_file is not None:
                 "Predicción": y_pred,
             }))
 
-            # Si el archivo contiene la columna 'Failure_Risk', calcular métricas
+            # Si el archivo contiene la columna 'Riesgo_de_Falla', calcular métricas
             if 'copia' in locals():  # Verificar si 'copia' fue guardado
-                # Comparar las predicciones con la copia de la columna 'Failure_Risk'
+                # Comparar las predicciones con la copia de la columna 'Riesgo_de_Falla'
                 y_true = copia_prediccion  # Usamos la copia guardada
                 accuracy = accuracy_score(y_true, y_pred)
                 precision = precision_score(y_true, y_pred, average="weighted")
@@ -111,12 +111,12 @@ if prediction_file is not None:
 
                 st.write("### Métricas del modelo en las predicciones:")
                 col1, col2, col3, col4 = st.columns(4)
-                col1.metric("Accuracy", f"{accuracy: .2f}")
-                col2.metric("F1 Score", f"{f1: .2f}")
+                col1.metric("Exactitud", f"{accuracy: .2f}")
+                col2.metric("Puntaje F1", f"{f1: .2f}")
                 col3.metric("Precision", f"{precision: .2f}")
-                col4.metric("Recall", f"{recall: .2f}")
+                col4.metric("Sensibilidad", f"{recall: .2f}")
             else:
-                st.warning("No se encontraron datos para comparar con 'Failure_Risk'. No se calcularán métricas.")
+                st.warning("No se encontraron datos para comparar con 'Riesgo_de_Falla'. No se calcularán métricas.")
 
     except Exception as e:
         st.error(f"Ocurrió un error al realizar predicciones: {e}")
